@@ -4,5 +4,7 @@
     <string name="app_name">tomato</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="give_up">Give up</string>
+    <string name="initTime">25min</string>
 
 </resources>

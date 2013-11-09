@@ -31,12 +31,15 @@
         app:selectedColor="#FF000000"
         app:selectedBold="true"
         />
+
+    
+
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/base_noise"
-        />
-
+        android:layout_weight="1" >
+        
+    </android.support.v4.view.ViewPager>
+        
 </LinearLayout>
