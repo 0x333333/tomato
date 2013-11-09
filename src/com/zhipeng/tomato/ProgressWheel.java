@@ -1,7 +1,6 @@
 package com.zhipeng.tomato;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -40,9 +39,9 @@ public class ProgressWheel extends View {
 	private int paddingRight = 5;
 	
 	//Colors (with defaults)
-	private int barColor = 0xAA000000;
+	private int barColor = 0xBB0097D6;
 	private int circleColor = 0x00000000;
-	private int rimColor = 0xAADDDDDD;
+	private int rimColor = 0x440097D6;
 	private int textColor = 0xFF000000;
 
 	//Paints
@@ -259,7 +258,7 @@ public class ProgressWheel extends View {
 	 */
 	public void resetCount() {
 		progress = 0;
-		setText(Resources.getSystem().getString(R.string.twentyFive));
+		setText("25min");
 		invalidate();
 	}
 
