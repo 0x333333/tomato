@@ -7,14 +7,19 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 public final class TestFragment extends Fragment {
     private static final String KEY_CONTENT = "TestFragment:Content";
+    
     private ProgressWheel pw;
     private TextView text;
+    
+    private boolean running;
+    private int progress = 0;
 
     public static TestFragment newInstance(String content) {
         TestFragment fragment = new TestFragment();
@@ -43,14 +48,31 @@ public final class TestFragment extends Fragment {
     @SuppressLint("ResourceAsColor")
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    	pw = new ProgressWheel(getActivity(), null);
         
-        pw = new ProgressWheel(getActivity(), null);
-        LayoutParams params = new LayoutParams(
+    	final Runnable r = new Runnable() {
+			public void run() {
+				running = true;
+				while(progress<150000) {
+					progress++;
+					pw.incrementProgress(progress);
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				running = false;
+			}
+        };
+    	
+    	LayoutParams params = new LayoutParams(
         		(int) (getResources().getDisplayMetrics().density * 250), 
         		(int) (getResources().getDisplayMetrics().density * 250));
         params.gravity = Gravity.CENTER;
         pw.setLayoutParams(params);
-        pw.setText(getString(R.string.initTime));
+        pw.setText(getString(R.string.start));
         pw.setTextColor(R.color.textColor);
         pw.setTextSize((int) (50 * getResources().getDisplayMetrics().density));
         pw.setRimColor(R.color.rimColor);
@@ -58,6 +80,17 @@ public final class TestFragment extends Fragment {
         pw.setBarColor(R.color.barColor);
         pw.setBarWidth(20);
         pw.setBarLength(60);
+        pw.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				if(!running) {
+					progress = 0;
+					pw.resetCount();
+					Thread s = new Thread(r);
+					s.start();
+				}
+			}
+        });
+        
         
         text = new TextView(getActivity());
         text.setGravity(Gravity.CENTER);

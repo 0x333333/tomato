@@ -1,6 +1,7 @@
 package com.zhipeng.tomato;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -258,7 +259,7 @@ public class ProgressWheel extends View {
 	 */
 	public void resetCount() {
 		progress = 0;
-		setText("0%");
+		setText(Resources.getSystem().getString(R.string.twentyFive));
 		invalidate();
 	}
 
@@ -283,10 +284,16 @@ public class ProgressWheel extends View {
 	/**
 	 * Increment the progress by 1 (of 360)
 	 */
-	public void incrementProgress() {
+	public void incrementProgress(int p) {
 		isSpinning = false;
-		progress++;
-		setText(Math.round(((float)progress/360)*100) + "%");
+		if(p%100 == 0) {
+			int timeRest = 1500 - p/100;
+			int min = timeRest/60;
+			int sec = timeRest%60;
+			setText(min+"min"+sec);
+		}
+		if(p%416 == 0)
+			progress++;
 		spinHandler.sendEmptyMessage(0);
 	}
 
