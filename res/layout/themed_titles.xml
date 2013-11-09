@@ -26,13 +26,8 @@
         android:padding="10dip"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:background="#F9F9F9"
         android:textColor="#AA000000"
         android:textSize="18sp"
-        app:footerColor="#FFAA2222"
-        app:footerLineHeight="2dp"
-        app:footerIndicatorHeight="3dp"
-        app:footerIndicatorStyle="underline"
         app:selectedColor="#FF000000"
         app:selectedBold="true"
         />
