@@ -258,7 +258,7 @@ public class ProgressWheel extends View {
 	 */
 	public void resetCount() {
 		progress = 0;
-		setText("25min");
+		setText("START");
 		invalidate();
 	}
 
@@ -285,14 +285,17 @@ public class ProgressWheel extends View {
 	 */
 	public void incrementProgress(int p) {
 		isSpinning = false;
-		if(p%100 == 0) {
-			int timeRest = 1500 - p/100;
-			int min = timeRest/60;
-			int sec = timeRest%60;
-			setText(min+"min"+sec);
-		}
-		if(p%416 == 0)
-			progress++;
+//		if(p%100 == 0) {
+//			int timeRest = 1500 - p/100;
+//			int min = timeRest/60;
+//			int sec = timeRest%60;
+//			setText(min+"min"+sec);
+//		}
+//		if(p%416 == 0)
+//			progress++;
+		progress++;
+		setText(Math.round(((float)progress/360)*100) + "%");
+		
 		spinHandler.sendEmptyMessage(0);
 	}
 

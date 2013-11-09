@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
-public final class TestFragment extends Fragment {
+public final class DoneFragment extends Fragment {
 	private static final String KEY_CONTENT = "TestFragment:Content";
 
 	private ProgressWheel pw;
@@ -25,8 +25,8 @@ public final class TestFragment extends Fragment {
 	private boolean running;
 	private int progress = 0;
 
-	public static TestFragment newInstance(String content) {
-		TestFragment fragment = new TestFragment();
+	public static DoneFragment newInstance(String content) {
+		DoneFragment fragment = new DoneFragment();
 
 		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < 20; i++) {

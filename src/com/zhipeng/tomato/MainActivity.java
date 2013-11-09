@@ -20,12 +20,14 @@ public class MainActivity extends SherlockFragmentActivity {
         setContentView(R.layout.themed_titles);
 
         mAdapter = new TestFragmentAdapter(getSupportFragmentManager());
+        
 
         mPager = (ViewPager)findViewById(R.id.pager);
         mPager.setAdapter(mAdapter);
 
         mIndicator = (TitlePageIndicator)findViewById(R.id.indicator);
         mIndicator.setViewPager(mPager);
+        mIndicator.setCurrentItem(1);
     }
 
 }
