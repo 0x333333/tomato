@@ -14,7 +14,17 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
+        <item name="actionBarStyle">@style/Theme.MyTheme.ActionBar</item>
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+    <style name="Theme.MyTheme.ActionBar" parent="Widget.Sherlock.ActionBar">
+        <item name="background">@drawable/bg_header</item>
+		<item name="titleTextStyle">@style/Theme.MyTheme.ActionBar.TitleTextStyle</item>
+    </style>
+    
+    <style name="Theme.MyTheme.ActionBar.TitleTextStyle" parent="TextAppearance.Sherlock.Widget.ActionBar.Title">
+		<item name="android:textColor">#ffffff</item>
     </style>
 
 </resources>

@@ -20,7 +20,7 @@
 	<color name="textColor">#111111</color>
 	<color name="rimColor">#0097D6</color>
 	<color name="barColor">#0097D6</color>
-	<color name="backup">#0097D6</color>
+	<color name="backup">#88000000</color>
  
  
 </resources>

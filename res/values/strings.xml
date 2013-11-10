@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">tomato</string>
+    <string name="app_name">Tomatodo</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="give_up">Give up</string>
@@ -11,5 +11,10 @@
     <string name="stopMsg">Are you sure to quit this tomato?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="cong">Congradulations!</string>
+    <string name="congText">What were you doing?</string>
+    <string name="noTodo">No Todo yet.</string>
+    <string name="addTodo">Click me to add!</string>
+    <string name="noDone">No Done yet.</string>
 
 </resources>

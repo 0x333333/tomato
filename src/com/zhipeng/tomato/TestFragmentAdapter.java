@@ -21,7 +21,14 @@ class TestFragmentAdapter extends FragmentPagerAdapter implements IconPagerAdapt
 
     @Override
     public Fragment getItem(int position) {
-        return TestFragment.newInstance("hello world!");
+    	if (position == 0)
+    		return DoneFragment.newInstance("Done");
+    	else if (position == 1)
+    		return DoingFragment.newInstance("Doing");
+    	else if (position == 2)
+    		return TodoFragment.newInstance("Done");
+    	else
+    		return null;
     }
 
     @Override

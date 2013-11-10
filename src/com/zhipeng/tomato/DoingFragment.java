@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,27 +16,22 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
-public final class TestFragment extends Fragment {
+public final class DoingFragment extends Fragment {
 	private static final String KEY_CONTENT = "TestFragment:Content";
 
 	private ProgressWheel pw;
 	private TextView text;
+	
 	private Thread s;
+	private Runnable r;
+	private Handler h;
+	
 	private boolean isStop = false; 
-
 	private boolean running;
 	private int progress = 0;
 
-	public static TestFragment newInstance(String content) {
-		TestFragment fragment = new TestFragment();
-
-		StringBuilder builder = new StringBuilder();
-		for (int i = 0; i < 20; i++) {
-			builder.append(content).append(" ");
-		}
-		builder.deleteCharAt(builder.length() - 1);
-		fragment.mContent = builder.toString();
-
+	public static DoingFragment newInstance(String content) {
+		DoingFragment fragment = new DoingFragment();
 		return fragment;
 	}
 
@@ -56,20 +53,42 @@ public final class TestFragment extends Fragment {
 			Bundle savedInstanceState) {
 		pw = new ProgressWheel(getActivity(), null);
 
-		final Runnable r = new Runnable() {
+		r = new Runnable() {
 			public void run() {
+				Message msg = new Message();
+				Bundle data = new Bundle();
 				running = true;
 				while (progress < 361 && !isStop) {
 					progress++;
 					pw.incrementProgress(progress);
 					try {
-						Thread.sleep(10);
+						Thread.sleep(15);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
 				running = false;
+				if(!isStop) {
+					data.putString("res", "1");
+					msg.setData(data);
+					h.sendMessage(msg);
+				}
+			}
+		};
+		
+		h = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				super.handleMessage(msg);
+				Bundle data = msg.getData();
+				String requestRes = data.getString("res");
+				if(requestRes.equals("1")){
+					AlertDialog dialog = new AlertDialog.Builder(getActivity())
+					.setTitle(getResources().getString(R.string.cong))
+					.setMessage(getResources().getString(R.string.congText))
+					.create();
+					dialog.show();
+				}
 			}
 		};
 
@@ -103,26 +122,27 @@ public final class TestFragment extends Fragment {
 		text.setPadding(20, 20, 20, 20);
 		text.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				AlertDialog dialog = new AlertDialog.Builder(getActivity())
-				.setTitle(getResources().getString(R.string.stopTitle))
-				.setMessage(getResources().getString(R.string.stopMsg))
-				.setPositiveButton(getResources().getString(R.string.yes),
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								isStop = true;
-								pw.resetCount();
-								dialog.dismiss();
-							}
-						})
-				.setNegativeButton(getResources().getString(R.string.no),
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								dialog.dismiss();
-							}
-						})
-				.create();
-				dialog.show();
-
+				if(running) {
+					AlertDialog dialog = new AlertDialog.Builder(getActivity())
+					.setTitle(getResources().getString(R.string.stopTitle))
+					.setMessage(getResources().getString(R.string.stopMsg))
+					.setPositiveButton(getResources().getString(R.string.yes),
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int which) {
+									isStop = true;
+									pw.resetCount();
+									dialog.dismiss();
+								}
+							})
+					.setNegativeButton(getResources().getString(R.string.no),
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int which) {
+									dialog.dismiss();
+								}
+							})
+					.create();
+					dialog.show();
+				}
 			}
 		});
 
