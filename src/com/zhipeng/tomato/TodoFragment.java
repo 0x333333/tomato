@@ -22,7 +22,7 @@ public final class TodoFragment extends Fragment {
 	public static TodoFragment newInstance(String content) {
 		TodoFragment fragment = new TodoFragment();
 		return fragment;
-	}
+	}	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
