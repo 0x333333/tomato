@@ -58,7 +58,7 @@ public final class DoingFragment extends Fragment {
 				Message msg = new Message();
 				Bundle data = new Bundle();
 				running = true;
-				while (progress < 361 && !isStop) {
+				while (progress < 150000 && !isStop) {
 					progress++;
 					pw.incrementProgress(progress);
 					try {
@@ -107,7 +107,7 @@ public final class DoingFragment extends Fragment {
 			public void onClick(View v) {
 				if (!running) {
 					progress = 0;
-					pw.resetCount();
+					pw.stopSpinning();
 					isStop = false;
 					s = new Thread(r);
 					s.start();
