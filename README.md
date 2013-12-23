@@ -5,7 +5,7 @@ Inspired by
 
 Tomatodo has
 
-- Integration of ActionbarSherlock, ViewPagerIndicator, progressWheel and Android-Bootstrap.
+- Integration of ActionbarSherlock, ViewPagerIndicator, progressWheel, etc.
 - Multiple languages support.
 
 *Well, I just found there has been an app in Google play, but I don't want to quit this project.*
